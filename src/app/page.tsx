@@ -5,6 +5,7 @@ export default function Home() {
   return (
     <main className="landing-page">
       <Image
+        className="landing-img"
         src="/hero-image.jpg"
         alt="hero image"
         width={400}
