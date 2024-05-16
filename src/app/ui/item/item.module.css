@@ -1,0 +1,39 @@
+.card {
+    background-color: #b1b1b1;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.image {
+    width: 100%;
+    max-height: 350px;
+    object-fit: cover;
+}
+
+.cardContent {
+    padding: 20px;
+}
+
+.description {
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.price {
+    font-weight: bold;
+}
+
+.addToCartButton {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.addToCartButton:hover {
+    background-color: #0056b3;
+}
