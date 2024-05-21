@@ -1,7 +1,13 @@
+'use client';
+
+import { useFormState, useFormStatus } from 'react-dom';
+import { authenticate } from '@/lib/actions';
 import Image from "next/image";
 import './index.css'
 
 export default function Home() {
+  const [errorMessage, dispatch] = useFormState(authenticate, undefined);
+
   return (
     <main className="landing-page">
       <Image
@@ -11,7 +17,7 @@ export default function Home() {
         width={400}
         height={800}
       />
-      <form className="login-form">
+      <form action={dispatch} className="login-form">
         <Image
           src="/logo.png"
           alt="logo"
