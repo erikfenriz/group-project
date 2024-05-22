@@ -41,3 +41,32 @@
     border-radius: 10px;
     margin-top: 40px;
 }
+/* Sign-out button styling */
+.signout-container {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+  }
+  
+  .signout-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 48px;
+    background-color: #9AD4D6;
+    color: black;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .signout-btn:hover {
+    background-color: #86c3c5;
+  }
+  
+  .icon {
+    font-size: 24px;
+  }
