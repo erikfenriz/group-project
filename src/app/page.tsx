@@ -32,17 +32,32 @@ export default function Home() {
         />
         <label className="login-lbl">
           Email
-          <input type="email" className="login-field" />
+          <input type="email" className="login-field" 
+          placeholder="Enter your email address" required/>
         </label>
+
         <label className="login-lbl">
           Password
-          <input type="password" className="login-field" />
+          <input type="password" className="login-field" 
+          placeholder="Enter password" required 
+          minLength={6}/>
         </label>
         <button type="submit" className="login-btn">
           Login
         </button>
+        <div
+          className="error-message flex h-8 items-end space-x-1"
+          aria-live="polite"
+          aria-atomic="true"
+        >
+        {errorMessage && (
+          <>
+            <p className="text-sm text-red-500">{errorMessage}</p>
+          </>
+        )}
+      </div>
       </form>
-
+    
       {/* Sign-out section */}
       <div className="signout-container">
         <form onSubmit={handleSignOut}>
