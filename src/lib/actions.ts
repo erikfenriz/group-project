@@ -7,12 +7,6 @@ import { redirect } from 'next/navigation';
 import { signIn } from '@/auth';
 
 
-export async function signOut() {
-  
-  console.log("Sign out executed");
-  
-}
-
 const InvoiceSchema = z.object({
   id: z.string(),
   customerId: z.string({
@@ -131,7 +125,8 @@ export async function deleteInvoice(id: string) {
     return { message: 'Database Error: Failed to Delete Invoice.' };
   }
 }
-  
+
+
 export async function authenticate(
   prevState: string | undefined,
   formData: FormData,
@@ -144,4 +139,8 @@ export async function authenticate(
     }
     throw error;
   }
+}
+
+export async function signOut() {  
+  console.log("Sign out executed");  
 }

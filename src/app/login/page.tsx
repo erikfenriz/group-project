@@ -1,4 +1,4 @@
-import Home from '@/app/page';
+import Home from '@/app/login/login-form';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
