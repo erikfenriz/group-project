@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styles from './CommentSection.module.css';
+import styles from './commentSection.module.css';
 
 interface Comment {
     id: number;
