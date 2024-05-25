@@ -1,21 +1,20 @@
 const mongodb = require('../db/connect');
 
 const ObjectId = require('mongodb').ObjectId;
+const collectionName = 'items';
 
-const getAll = async (req, res, next) => {
-  /**
-   * #swagger.tags = ['Articles']
-   * #swagger.summary = "List all articles"
-  */
-  
+const getAll = async (req, res) => {
   try {
-    const result = await mongodb.getDb().db().collection('articles').find();
+    // const db = mongodb.getDb().db();
+    // const collections = await db.listCollections().toArray();
+    // console.log('Collections:', collections);
+
+    const result = await mongodb.getDb().db().collection(collectionName).find();
     result.toArray().then((lists) => {
-      if (lists.length == 0) {
-        res.status(404).json({ message: 'There are no registered articles' });
+      if (lists.length === 0) {
+        res.status(404).json({ message: 'There are no registered items' });
         return;
       }
-      res.setHeader('Content-Type', 'application/json');
       res.status(200).json(lists);
     });
 
@@ -25,28 +24,20 @@ const getAll = async (req, res, next) => {
 };
 
 
-const getSingle = async (req, res, next) => {
-  /**
-   * #swagger.tags = ['Articles']
-   * #swagger.summary = "Get an article by the ID register in MongoDB"
-   * #swagger.description = "Enter the article ID."
-  */
-
+const getSingle = async (req, res) => {
   try {
     if (!ObjectId.isValid(req.params.id)) {
       res.status(400).json({ message: 'You must use a valid article ID to find one.' });
     }
 
-    const articleId = new ObjectId(req.params.id);
-    const result = await mongodb.getDb().db().collection('articles').find({ _id: articleId });
+    const itemId = new ObjectId(req.params.id);
+    const result = await mongodb.getDb().db().collection(collectionName).find({ _id: itemId });
 
     result.toArray().then((lists) => {
-        if (lists.length == 0) {
-          res.status(404).json({message: 'The article with that ID does not exist.'});
+        if (lists.length === 0) {
+          res.status(404).json({message: 'The item with that ID does not exist.'});
           return;
         }
-
-        res.setHeader('Content-Type', 'application/json');
         res.status(200).json(lists[0]);
     });
   } catch (err) {
@@ -55,7 +46,7 @@ const getSingle = async (req, res, next) => {
 };
 
 
-const createArticle = async (req, res) => {  
+const createArticle = async (req, res) => {
   /**
     * #swagger.tags = ['Articles']
     * #swagger.summary = "Create an article"
@@ -88,13 +79,7 @@ const createArticle = async (req, res) => {
   }
 };
 
-  
 const updateArticle = async (req, res) => {
-  /**
-   * #swagger.tags = ['Articles']
-   * #swagger.summary = "Update article information by ID"
-   * #swagger.description = "Enter the article ID and any necessary changes in the body template provided."
-  */
 
   const articleBody = {
       title: req.body.title,
@@ -112,7 +97,7 @@ const updateArticle = async (req, res) => {
     }
 
     const articleId = new ObjectId(req.params.id);
-    const response = await mongodb.getDb().db().collection('articles').replaceOne({ _id: articleId }, articleBody);
+    const response = await mongodb.getDb().db().collection(collectionName).replaceOne({ _id: articleId }, articleBody);
 
     if (response.modifiedCount > 0) {
       res.status(204).json(response);
@@ -124,20 +109,13 @@ const updateArticle = async (req, res) => {
   }
 };
 
-
-
 const deleteArticle = async (req, res) => {
-  /**
-   * #swagger.tags = ['Articles']
-   * #swagger.summary = "Remove an article by ID"
-   * #swagger.description = "Enter the article ID <p> **WARNING:** The record will be permanently removed from the database.<p>"
-  */
   try {
     if (!ObjectId.isValid(req.params.id)) {
       res.status(400).json({ message: 'You must use a valid article ID to find one.' });
     }
     const articleId = new ObjectId(req.params.id);
-    const response = await mongodb.getDb().db().collection('articles').deleteOne({ _id: articleId }, true);
+    const response = await mongodb.getDb().db().collection(collectionName).deleteOne({ _id: articleId }, true);
 
     if (response.deletedCount > 0) {
       res.status(204).json(response);
