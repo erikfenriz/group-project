@@ -6,16 +6,11 @@ import Image from "next/image";
 import '@/app/login/login.css';
 
 
-export default function Home() {
+export default function LoginForm() {
   const [errorMessage, dispatch] = useFormState(authenticate, undefined);
 
-  const handleSignOut = async (event: React.FormEvent) => {
-    event.preventDefault();
-    await signOut();
-  };
-
   return (
-    <main className="landing-page">
+    <main className="login-page">
       <div className="form-wrapper">
           
       <form action={dispatch} className="login-form">
@@ -43,7 +38,7 @@ export default function Home() {
           name="password"
           placeholder="Enter password"
           required 
-          minLength={6}/>
+          minLength={4}/>
         </label>
         <LoginButton />
         <div
@@ -64,18 +59,6 @@ export default function Home() {
       
       </form>
     
-      {/* Sign-out section */}
-      <div className="signout-container">
-        <form onSubmit={handleSignOut}>
-          <button
-            type="submit"
-            className="signout-btn"
-          >
-            <span className="icon">&#x26A1;</span>
-            <div className="hidden md:block">Sign Out</div>
-          </button>
-        </form>
-      </div>
       </div>
     </main>
   );

@@ -1,12 +1,10 @@
-.landing-page{
+.login-page{
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
   height: 100vh;
-  background-color: #101935;
-  background-image: url("/public/global.png");
   background-size: 80%;
   background-repeat: no-repeat;
   background-position: bottom;

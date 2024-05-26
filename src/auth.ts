@@ -1,37 +1,32 @@
 import NextAuth from 'next-auth';
+import GitHub from 'next-auth/providers/github';
 import Credentials from 'next-auth/providers/credentials';
 import { authConfig } from './auth.config';
 import { z } from 'zod'; //form validation
-import { sql } from '@vercel/postgres';
-import type { User } from '@/lib/definitions';
+import connectToDatabase from './app/utils/db';
+import Users from './app/models/Users';
 import bcrypt from 'bcrypt'; //Hashing converts a password into a fixed-length string of characters
  
 
-async function getUser(email: string): Promise<User | undefined> {
-  try {
-    const user = await sql<User>`SELECT * FROM users WHERE email=${email}`;
-    return user.rows[0];
-  } catch (error) {
-    console.error('Failed to fetch user:', error);
-    throw new Error('Failed to fetch user.');
-  }
-}
- 
 export const { auth, signIn, signOut } = NextAuth({
   ...authConfig,
   providers: [
     Credentials({
       async authorize(credentials) {
         const parsedCredentials = z
-          .object({ email: z.string().email(), password: z.string().min(6) })
+          .object({ email: z.string().email(), password: z.string().min(4) })
           .safeParse(credentials);
  
           if (parsedCredentials.success) {
             const { email, password } = parsedCredentials.data;
-            const user = await getUser(email);
+            // const user = await getUser(email);
+            await connectToDatabase();
+            const user = await Users.findOne({ username: credentials.email });
+            console.log("find User:", user);
             if (!user) return null;
-            const passwordsMatch = await bcrypt.compare(password, user.password);
-   
+            // const passwordsMatch = await bcrypt.compare(password, user.password);
+            const passwordsMatch = password === user.password;
+            console.log("password:", password, " passwordsMatch", passwordsMatch, " 1234 hash", bcrypt.hash("1234", "10"));
             if (passwordsMatch) return user;
           }
    
@@ -40,4 +35,5 @@ export const { auth, signIn, signOut } = NextAuth({
         },
       }),
     ],
+    secret: process.env.NEXTAUTH_SECRET,
   });
