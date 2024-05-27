@@ -30,6 +30,7 @@ const Home = () => {
               height={150}
             />
           <a style={{ color: 'black' }} href="/login">Sign in</a> 
+          <a style={{ color: 'black' }} href="/register">REGISTER</a>
           </form>
         }
       </div>
