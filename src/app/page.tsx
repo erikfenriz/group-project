@@ -29,13 +29,11 @@ const Home = () => {
               width={150}
               height={150}
             />
-          <a style={{ color: 'black' }} href="/login">Sign in</a> 
-          <a style={{ color: 'black' }} href="/register">REGISTER</a>
+          <a style={{ color: 'blue', textDecoration: 'none' }} href="/login">Sign in</a> 
+          <a style={{ color: 'white', backgroundColor: 'green', padding: '10px 20px' }} href="/register">REGISTER</a>
           </form>
         }
-      </div>
-      
-     
+      </div>     
 
     </main>
   );

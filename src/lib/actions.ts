@@ -5,6 +5,7 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { signIn, signOut } from '@/auth';
 
+
 export async function authenticate(
   prevState: string | undefined,
   formData: FormData,
@@ -22,5 +23,6 @@ export async function authenticate(
 
 export async function signOut_() {
   await signOut();
-  console.log("Sign out executed");  
+  console.log("Sign out executed");
+  redirect('/');
 }

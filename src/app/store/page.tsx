@@ -3,26 +3,26 @@ import {items} from '@/lib/placeholder-data'; // Assuming you have defined the I
 import styles from './styles.module.css';
 import ItemCard from "@/app/ui/item/item";
 import {Item} from "@/lib/definitions";
-import { signOut } from '@/auth';
-
+import { signOut_ } from '@/lib/actions'; // Import your signOut function
 
 const Home: React.FC = () => {
     return (
+
         <main className={styles.container}>
             <form
             action={async () => {
                 'use server';
-                await signOut();
-                console.log("Sign out executed client"); 
+                await signOut_();
+                console.log("Sign out executed client");
+                //window.location.href = "/";
             }}
             >
             <button
-                type="submit"
-                className="signout-btn"
+                type="submit" className="signout-btn"
             >
-                <span className="icon">&#x26A1;</span>
-                <div className="hidden md:block" style={{ color: 'black' }}>Sign Out</div>
+                <div className="signout-btn" style={{ color: 'black' }}>Sign Out</div>
             </button>
+
             </form>
             <img className={styles.logo} src='/logo.png' alt='logo'/>
             <div className={styles.grid}>

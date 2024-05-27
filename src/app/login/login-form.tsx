@@ -1,7 +1,7 @@
 'use client';
 
 import { useFormState, useFormStatus } from 'react-dom';
-import { authenticate, signOut } from '@/lib/actions';
+import { authenticate} from '@/lib/actions';
 import Image from "next/image";
 import '@/app/login/login.css';
 
@@ -52,10 +52,12 @@ export default function LoginForm() {
           </>
         )}
       </div>
+      
+      {/*
       <div className="account-action">
               <p>Don't have an account?</p>
               <a style={{ color: 'green' }} href="/login">Create One</a>
-            </div>
+      </div> */}
       
       </form>
     
