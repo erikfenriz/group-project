@@ -2,7 +2,7 @@ import mongoose, { Mongoose } from 'mongoose';
 
 // Load environment variables from .env.local file
 // console.log("env process.env.MONGODB_URI", process.env.MONGODB_URI);
-const MONGODB_URI = process.env.MONGODB_URI;
+const MONGODB_URI: any = process.env.MONGODB_URI;
 // console.log("MONGODB_URI:", MONGODB_URI);
 
 if (!MONGODB_URI) {
@@ -31,7 +31,7 @@ async function connectToDatabase(): Promise<Mongoose> {
   }
 
   if (!cached.promise) {
-    const opts = {
+    const opts: any = {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     };
