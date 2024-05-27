@@ -3,7 +3,7 @@
 import { z } from 'zod';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-import { signIn } from '@/auth';
+import { signIn, signOut } from '@/auth';
 
 export async function authenticate(
   prevState: string | undefined,
@@ -20,6 +20,7 @@ export async function authenticate(
   }
 }
 
-export async function signOut() {
+export async function signOut_() {
+  await signOut();
   console.log("Sign out executed");  
 }

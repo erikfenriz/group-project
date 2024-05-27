@@ -2,13 +2,13 @@
 import Image from "next/image";
 import './index.css'
 import { useState } from "react";
-import { authenticate, signOut } from '@/lib/actions';
+import { authenticate, signOut_ } from '@/lib/actions';
 
 const Home = () => {
   const [accountAction, setAccountAction] = useState ("login")
   const handleSignOut = async (event: React.FormEvent) => {
     event.preventDefault();
-    await signOut();
+    await signOut_();
   };
   return (
     <main className="landing-page"> 
@@ -35,18 +35,7 @@ const Home = () => {
         }
       </div>
       
-      {/* Sign-out section */}
-      <div className="signout-container">
-        <form onSubmit={handleSignOut}>
-          <button
-            type="submit"
-            className="signout-btn"
-          >
-            <span className="icon">&#x26A1;</span>
-            <div className="hidden md:block">Sign Out</div>
-          </button>
-        </form>
-      </div>
+     
 
     </main>
   );
