@@ -1,12 +1,9 @@
 import mongoose, { Mongoose } from 'mongoose';
-// import dotenv from 'dotenv';
 
 // Load environment variables from .env.local file
-// dotenv.config();
-
-console.log("env process.env.MONGODB_URI", process.env.MONGODB_URI);
+// console.log("env process.env.MONGODB_URI", process.env.MONGODB_URI);
 const MONGODB_URI = process.env.MONGODB_URI;
-console.log("MONGODB_URI:", MONGODB_URI);
+// console.log("MONGODB_URI:", MONGODB_URI);
 
 if (!MONGODB_URI) {
   throw new Error('Please define the MONGODB_URI environment variable inside .env.local');
@@ -38,8 +35,8 @@ async function connectToDatabase(): Promise<Mongoose> {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     };
-
     cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
+      console.log("Connected to Mongodb...")
       return mongoose;
     });
   }
