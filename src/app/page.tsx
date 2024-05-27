@@ -20,7 +20,6 @@ const Home = () => {
           width={400}
           height={800}
         />
-      
         {
           accountAction === "login" &&
           <form className="login-form">

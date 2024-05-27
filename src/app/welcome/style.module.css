@@ -1,5 +1,6 @@
 /* styles/Home.module.css */
 
+
 .container {
     min-height: 100vh;
     padding: 0 2rem;
@@ -10,6 +11,7 @@
   }
   
   .main {
+    background-color: brown;
     padding: 5rem 0;
     flex: 1;
     display: flex;
