@@ -6,7 +6,7 @@ import './index.css'
 
 export default async function Home() {
     const session = await getServerSession(options)
-    console.log('seess', session);
+    console.log('session', session);
 
     return (
         <main className="landing-page">
