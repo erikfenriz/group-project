@@ -44,7 +44,7 @@ const Store: React.FC = () => {
         <main className={styles.container}>
             <form
             action={async () => {
-                'use server';
+                
                 await signOut_();
                 console.log("Sign out executed client");
                 //window.location.href = "/";

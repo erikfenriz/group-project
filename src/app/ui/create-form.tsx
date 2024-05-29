@@ -4,7 +4,6 @@ import styles from "@/app/ui/create-form.module.css";
 import { PaperAirplaneIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import Image from "next/image";
-import Header from "./header";
 import { FormEvent } from "react";
 
 interface FormData {
@@ -100,7 +99,6 @@ function CreateForm() {
 
     return (
         <>
-            <Header />
             <form className={styles.form}  onSubmit={handleSubmit}>
                 <div className={styles.title_div}>
                     <h1 className={styles.title}>Post an item</h1>
