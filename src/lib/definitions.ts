@@ -14,7 +14,10 @@ export interface Item {
 
 export type User = {
   id: string;
-  name: string;
-  email: string;
+  location: string;
+  firstname: string;
+  lastname: string;
+  username: string;
   password: string;
+  storeName: string
 };

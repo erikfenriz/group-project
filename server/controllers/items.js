@@ -107,7 +107,7 @@ const createItem = async (req, res) => {
       category: parseInt(req.body.category),
     };
 
-    const response = await await mongodb.getDb().db().collection('items').insertOne(itemBody);
+    const response = await await mongodb.getDb().db().collection(collectionNameItems).insertOne(itemBody);
 
     if (response.acknowledged) {
       res.status(201).json(response);
@@ -151,18 +151,34 @@ const updateArticle = async (req, res) => {
   }
 };
 
-const deleteArticle = async (req, res) => {
+const deleteItem = async (req, res) => {
   try {
     if (!ObjectId.isValid(req.params.id)) {
-      res.status(400).json({ message: 'You must use a valid article ID to find one.' });
+      res.status(400).json({ message: 'You must use a valid item ID to find one.' });
     }
+
+    // Obtain user identifier from the request (assuming it's in req.user)
+    const userIdentifier = req.user.username; // Replace username with actual user identifier
+
     const articleId = new ObjectId(req.params.id);
+    const article = await mongodb.getDb().db().collection(collectionName).findOne({ _id: articleId });
+
+    // Check if the article exists
+    if (!article) {
+      return res.status(404).json({ message: 'Item not found.' });
+    }
+
+    // Check if the authenticated user is the owner of the item
+    if (article.storeName !== userIdentifier) {
+      return res.status(403).json({ message: 'You are not authorized to delete this item.' });
+    }
+
     const response = await mongodb.getDb().db().collection(collectionName).deleteOne({ _id: articleId }, true);
 
     if (response.deletedCount > 0) {
       res.status(204).json(response);
     } else {
-      res.status(500).json(response.error || 'Some error occurred while deleting the article.');
+      res.status(500).json(response.error || 'Some error occurred while deleting the item.');
     }
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -177,5 +193,5 @@ module.exports = {
     postItemRating,
     createItem,
     // updateArticle,
-    // deleteArticle
+    deleteItem
 };
