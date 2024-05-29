@@ -5,6 +5,8 @@ import React, {useEffect, useState} from 'react';
 import styles from './styles.module.css';
 import ItemCard from "@/app/ui/item/item";
 import {Item} from "@/lib/definitions";
+import { signOut_ } from '@/lib/actions';
+
 import Link from "next/link";
 import {API_BASE_URL} from "@/lib/api";
 
@@ -38,7 +40,23 @@ const Store: React.FC = () => {
         item.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
     return (
+
         <main className={styles.container}>
+            <form
+            action={async () => {
+                'use server';
+                await signOut_();
+                console.log("Sign out executed client");
+                //window.location.href = "/";
+            }}
+            >
+            <button
+                type="submit" className="signout-btn"
+            >
+                <div className="signout-btn" style={{ color: 'black' }}>Sign Out</div>
+            </button>
+
+            </form>
             <img className={styles.logo} src='/logo.png' alt='logo'/>
             <div className={styles.searchContainer}>
                 <input
