@@ -8,9 +8,11 @@ const itemsController = require('../controllers/items');
 
 router.get('/', itemsController.getAll);
 router.get('/:id', itemsController.getSingle);
+router.get('/', itemsController.getAll);
+router.get('/:id', itemsController.getSingle);
 router.get('/:id/rating', itemsController.getItemRating);
 router.post('/:id/rating', itemsController.postItemRating);
-// router.post('/', isAuthenticated, validations().articles, validate, itemsController.createArticle);
+router.post('/', itemsController.createItem);
 // router.put('/:id', isAuthenticated, validations().articles, validate, itemsController.updateArticle)
 // router.delete('/:id', isAuthenticated, itemsController.deleteArticle)
 

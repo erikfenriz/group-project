@@ -92,24 +92,27 @@ const postItemRating = async (req, res) => {
   }
 }
 
-const createArticle = async (req, res) => {
+
+const createItem = async (req, res) => {
   try {
-    const articleBody = {
-      title: req.body.title,
-      author: req.body.author,
-      publication_date: req.body.publication_date,
-      content: req.body.content,
-      keywords: req.body.keywords,
-      source: req.body.source,
-      url: req.body.url,
+
+    const itemBody = {
+      name: req.body.name,
+      description: req.body.description,
+      price: parseFloat(req.body.price),
+      size: req.body.size,
+      images: req.body.images,
+      storeId: parseInt(req.body.storeId),
+      storeName: req.body.storeName,
+      category: parseInt(req.body.category),
     };
 
-    const response = await mongodb.getDb().db().collection('articles').insertOne(articleBody);
+    const response = await await mongodb.getDb().db().collection('items').insertOne(itemBody);
 
     if (response.acknowledged) {
       res.status(201).json(response);
     } else {
-      res.status(500).json ({message: 'Some error occurred while creating the article.'})
+      res.status(500).json ({message: 'Some error occurred while creating the item.'})
     }
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -118,19 +121,21 @@ const createArticle = async (req, res) => {
 
 const updateArticle = async (req, res) => {
 
-  const articleBody = {
-      title: req.body.title,
-      author: req.body.author,
-      publication_date: req.body.publication_date,
-      content: req.body.content,
-      keywords: req.body.keywords,
-      source: req.body.source,
-      url: req.body.url,
+
+  const itemBody = {
+      name: req.body.name,
+      description: req.body.description,
+      price: req.body.price,
+      size: req.body.size,
+      images: req.body.images,
+      storeId: req.body.storeId,
+      storeName: req.body.storeName,
+      category: req.body.category
   };
 
   try {
     if (!ObjectId.isValid(req.params.id)) {
-      res.status(400).json({ message: 'You must use a valid article ID to find one.' });
+      res.status(400).json({ message: 'You must use a valid item ID to find one.' });
     }
 
     const articleId = new ObjectId(req.params.id);
@@ -170,7 +175,7 @@ module.exports = {
     getSingle,
     getItemRating,
     postItemRating,
-    // createArticle,
+    createItem,
     // updateArticle,
     // deleteArticle
 };
