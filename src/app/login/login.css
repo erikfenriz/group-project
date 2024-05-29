@@ -67,7 +67,7 @@
     bottom: 20px;
     left: 10px;
   }
-  
+
   .signout-btn {
     display: flex;
     align-items: center;
@@ -82,11 +82,11 @@
     cursor: pointer;
     font-size: 16px;
   }
-  
+
   .signout-btn:hover {
     background-color: #86c3c5;
   }
-  
+
   .icon {
     font-size: 24px;
   }
