@@ -156,24 +156,8 @@ const deleteItem = async (req, res) => {
     if (!ObjectId.isValid(req.params.id)) {
       res.status(400).json({ message: 'You must use a valid item ID to find one.' });
     }
-
-    // Obtain user identifier from the request (assuming it's in req.user)
-    const userIdentifier = req.user.username; // Replace username with actual user identifier
-
-    const articleId = new ObjectId(req.params.id);
-    const article = await mongodb.getDb().db().collection(collectionName).findOne({ _id: articleId });
-
-    // Check if the article exists
-    if (!article) {
-      return res.status(404).json({ message: 'Item not found.' });
-    }
-
-    // Check if the authenticated user is the owner of the item
-    if (article.storeName !== userIdentifier) {
-      return res.status(403).json({ message: 'You are not authorized to delete this item.' });
-    }
-
-    const response = await mongodb.getDb().db().collection(collectionName).deleteOne({ _id: articleId }, true);
+    const itemId = new ObjectId(req.params.id);
+    const response = await mongodb.getDb().db().collection(collectionNameItems).deleteOne({_id: itemId }, true);
 
     if (response.deletedCount > 0) {
       res.status(204).json(response);

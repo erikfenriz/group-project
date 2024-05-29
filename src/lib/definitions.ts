@@ -10,6 +10,7 @@ export interface Item {
   storeId: number; // ID of the store (assuming it's a number)
   storeName: string; // Name of the store
   category: number; // ID of the category (assuming it's a number)
+  email: string;
 };
 
 export type User = {
@@ -19,5 +20,10 @@ export type User = {
   lastname: string;
   username: string;
   password: string;
-  storeName: string
+  storeName: string;
 };
+
+export interface ItemPageProps {
+  item: Item;
+  handleDelete: (itemId: number, itemEmail: string) => void;
+}

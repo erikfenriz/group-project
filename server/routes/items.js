@@ -13,7 +13,7 @@ router.get('/:id', itemsController.getSingle);
 router.get('/:id/rating', itemsController.getItemRating);
 router.post('/:id/rating', itemsController.postItemRating);
 router.post('/', itemsController.createItem);
-router.delete('/', itemsController.deleteItem);
+router.delete('/:id', itemsController.deleteItem);
 // router.put('/:id', isAuthenticated, validations().articles, validate, itemsController.updateArticle)
 // router.delete('/:id', isAuthenticated, itemsController.deleteArticle)
 

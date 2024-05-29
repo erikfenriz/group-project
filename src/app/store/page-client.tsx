@@ -4,8 +4,7 @@ import React, {useEffect, useState} from 'react';
 // import {items} from '@/lib/placeholder-data';
 import styles from './styles.module.css';
 import ItemCard from "@/app/ui/item/item";
-import {Item} from "@/lib/definitions";
-
+import { Item } from "@/lib/definitions";
 import Link from "next/link";
 import {API_BASE_URL} from "@/lib/api";
 import {getServerSession} from "next-auth/next";
@@ -15,7 +14,7 @@ import {options} from "@/app/api/auth/[...nextauth]/options";
 const Store: React.FC = ({session}) => {
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [items, setItems] = useState<Item[]>([]);
-console.log('session', session);
+    console.log('session', session);
     useEffect(() => {
         const fetchItems = async () => {
             try {
@@ -41,6 +40,28 @@ console.log('session', session);
     const filteredItems = items.filter(item =>
         item.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
+
+    const handleDelete = async (itemId: number, itemEmail: string) => {
+        try {
+            if (session.user && session.user.email === itemEmail) {
+                const response = await fetch(`http://localhost:4000/items/${itemId}`, {
+                    method: 'DELETE',
+                });
+    
+                if (response.ok) {
+                    console.log(`Item with ID ${itemId} deleted successfully.`);
+                } else {
+                    const errorData = await response.json();
+                    console.error('Failed to delete item:', errorData.message);
+                }
+            } else {
+                console.log("You don't have permission to delete this item.");
+            }
+        } catch (error: any) {
+            console.error('An error occurred while deleting the item:', error.message);
+        }
+    };
+
     return (
 
         <main className={styles.container}>
@@ -58,9 +79,14 @@ console.log('session', session);
 
             <div className={styles.grid}>
                 {filteredItems.map((item: Item) => (
-                    <Link key={item._id} href={`/store/item/${item._id}`}>
-                        <ItemCard key={item._id} item={item}/>
-                    </Link>
+                    <div key={item._id}>
+                        <ItemCard
+                                key={item._id}
+                                item={item}
+                                session={session}
+                                handleDelete={handleDelete}
+                        />
+                    </div>
                 ))}
             </div>
         </main>
