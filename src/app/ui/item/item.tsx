@@ -8,7 +8,7 @@ interface ChildProps {
 
 const ItemCard: React.FC<ChildProps> = ({item}) => {
     return (
-        <div key={item.id} className={styles.card}>
+        <div key={item._id} className={styles.card}>
             <img src={item.images[0]} alt={item.name} className={styles.image}/>
             <div className={styles.cardContent}>
                 <h2>{item.name}</h2>

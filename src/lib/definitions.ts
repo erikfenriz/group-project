@@ -1,7 +1,7 @@
 /* typescript definitions */
 
 export interface Item {
-  id: number; // Auto unique ID (assuming it's a number)
+  _id: number; // Auto unique ID (assuming it's a number)
   name: string;
   description: string;
   price: number; // Number or double for price
@@ -10,4 +10,11 @@ export interface Item {
   storeId: number; // ID of the store (assuming it's a number)
   storeName: string; // Name of the store
   category: number; // ID of the category (assuming it's a number)
-}
+};
+
+export type User = {
+  id: string;
+  name: string;
+  email: string;
+  password: string;
+};

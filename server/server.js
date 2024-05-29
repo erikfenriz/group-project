@@ -26,9 +26,9 @@ app
 
   // allow passport use to use "express-session"
   .use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Heaters','Origin, X-Requested-With, Content-Type, Accept, Z-Key, Authorization');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
+    // res.setHeader('Access-Control-Allow-Origin', '*');
+    // res.setHeader('Access-Control-Allow-Heaters','Origin, X-Requested-With, Content-Type, Accept, Z-Key, Authorization');
+    // res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
     next();
   })
   .use(cors({ methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH']}))
@@ -75,4 +75,4 @@ mongodb.initDb((err) => {
   });
 
 
-  module.exports = app;
+module.exports = app;

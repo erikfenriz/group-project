@@ -1,7 +1,7 @@
 import {Item} from "./definitions";
 export const items: Item[] = [
   {
-    id: 1,
+    _id: 1,
     name: "Handcrafted Ceramic Mug",
     description: "Beautifully glazed ceramic mug, perfect for morning coffee",
     price: 24.99,
@@ -12,7 +12,7 @@ export const items: Item[] = [
     category: 5 // Handcrafted items category
   },
   {
-    id: 2,
+    _id: 2,
     name: "Watercolor Paint Set",
     description: "High-quality watercolor paints in a portable case",
     price: 39.99,
@@ -23,7 +23,7 @@ export const items: Item[] = [
     category: 6 // Art supplies category
   },
   {
-    id: 3,
+    _id: 3,
     name: "Handwoven Throw Blanket",
     description: "Soft and cozy throw blanket, handmade with natural fibers",
     price: 79.99,
@@ -34,7 +34,7 @@ export const items: Item[] = [
     category: 5 // Handcrafted items category
   },
   {
-    id: 4,
+    _id: 4,
     name: "Handmade Leather Journal",
     description: "Genuine leather journal with hand-stitched binding",
     price: 34.99,
@@ -45,7 +45,7 @@ export const items: Item[] = [
     category: 5 // Handcrafted items category
   },
   {
-    id: 5,
+    _id: 5,
     name: "Wooden Art Easel",
     description: "Sturdy wooden easel for painting and displaying artwork",
     price: 129.99,
@@ -56,7 +56,7 @@ export const items: Item[] = [
     category: 6 // Art supplies category
   },
   {
-    id: 6,
+    _id: 6,
     name: "Macrame Plant Hanger",
     description: "Bohemian-style macrame plant hanger, perfect for indoor plants",
     price: 19.99,
@@ -67,7 +67,7 @@ export const items: Item[] = [
     category: 5 // Handcrafted items category
   },
   {
-    id: 7,
+    _id: 7,
     name: "Artist Paintbrush Set",
     description: "Assortment of fine artist paintbrushes for various techniques",
     price: 29.99,
@@ -78,7 +78,7 @@ export const items: Item[] = [
     category: 6 // Art supplies category
   },
   {
-    id: 8,
+    _id: 8,
     name: "Hand-Poured Soy Candle",
     description: "Aromatic soy candle in a reusable glass jar, crafted with natural ingredients",
     price: 17.99,
@@ -89,7 +89,7 @@ export const items: Item[] = [
     category: 5 // Handcrafted items category
   },
   {
-    id: 9,
+    _id: 9,
     name: "Leather Wallet",
     description: "Genuine leather wallet",
     price: 49.99,
@@ -100,7 +100,7 @@ export const items: Item[] = [
     category: 3 // Accessories category
   },
   {
-    id: 10,
+    _id: 10,
     name: "Hand-Dyed Silk Scarf",
     description: "Luxurious silk scarf dyed using natural plant-based dyes",
     price: 69.99,
@@ -109,5 +109,14 @@ export const items: Item[] = [
     storeId: 206,
     storeName: "Silk & Petals",
     category: 3 // Accessories category
+  },
+];
+
+const users = [
+  {
+    id: '410544b2-4001-4271-9855-fec4b6a6442a',
+    name: 'User',
+    email: 'team@nextmail.com',
+    password: '222222',
   },
 ];

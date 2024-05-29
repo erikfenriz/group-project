@@ -1,7 +1,8 @@
 const mongodb = require('../db/connect');
 
 const ObjectId = require('mongodb').ObjectId;
-const collectionName = 'items';
+const collectionNameItems = 'items';
+const collectionNameRating = 'rating';
 
 const getAll = async (req, res) => {
   try {
@@ -119,6 +120,7 @@ const createItem = async (req, res) => {
 };
 
 const updateArticle = async (req, res) => {
+
 
   const itemBody = {
       name: req.body.name,
