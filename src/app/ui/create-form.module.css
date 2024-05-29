@@ -53,3 +53,7 @@
     width: 20px;
     height: auto;
 }
+.submit_button:active {
+    background-color: #B8A8B6;
+    transform: scale(0.95);
+}
