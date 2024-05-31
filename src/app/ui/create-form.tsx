@@ -17,7 +17,11 @@ interface FormData {
     category: string;
 }
 
-function CreateForm() {
+interface CreateFormProps {
+    session: any;
+}
+
+const CreateForm: React.FC<CreateFormProps> = ({ session }) => {
     const [formData, setFormData] = useState<FormData>({
         name: "",
         description: "",
@@ -76,6 +80,7 @@ function CreateForm() {
           storeId: parseInt(formData.storeId), // Convert storeId to number
           storeName: formData.storeName,
           category: parseInt(formData.category), // Convert category to number
+          email: session.user.email
         };
     
         try {

@@ -105,6 +105,7 @@ const createItem = async (req, res) => {
       storeId: parseInt(req.body.storeId),
       storeName: req.body.storeName,
       category: parseInt(req.body.category),
+      email: req.body.email
     };
 
     const response = await await mongodb.getDb().db().collection(collectionNameItems).insertOne(itemBody);
