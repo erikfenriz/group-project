@@ -7,14 +7,12 @@ import ItemCard from "@/app/ui/item/item";
 import { Item } from "@/lib/definitions";
 import Link from "next/link";
 import {API_BASE_URL} from "@/lib/api";
-import {getServerSession} from "next-auth/next";
-import {options} from "@/app/api/auth/[...nextauth]/options";
 
 // @ts-ignore
 const Store: React.FC = ({session}) => {
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [items, setItems] = useState<Item[]>([]);
-    console.log('session', session);
+
     useEffect(() => {
         const fetchItems = async () => {
             try {
@@ -47,7 +45,7 @@ const Store: React.FC = ({session}) => {
                 const response = await fetch(`http://localhost:4000/items/${itemId}`, {
                     method: 'DELETE',
                 });
-    
+
                 if (response.ok) {
                     console.log(`Item with ID ${itemId} deleted successfully.`);
                 } else {
@@ -79,14 +77,14 @@ const Store: React.FC = ({session}) => {
 
             <div className={styles.grid}>
                 {filteredItems.map((item: Item) => (
-                    <div key={item._id}>
+                    <Link key={item._id} href={`/store/item/${item._id}`}>
                         <ItemCard
                                 key={item._id}
                                 item={item}
                                 session={session}
                                 handleDelete={handleDelete}
                         />
-                    </div>
+                    </Link>
                 ))}
             </div>
         </main>
