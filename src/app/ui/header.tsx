@@ -7,7 +7,7 @@ export default function Header() {
     return (
       <header className={styles.header}>
         <Link
-        href="/"
+        href="/store"
         >
             <Image
             className={styles.header_logo}
@@ -20,15 +20,15 @@ export default function Header() {
         <div className={styles.nav_bar}>
             <Link
             className={styles.nav_link}
-            href="/"
+            href="/store"
             ><HomeIcon className={styles.nav_icon}/> <span>Home</span></Link>
             <Link
             className={styles.nav_link}
-            href="/"
-            ><ShoppingBagIcon className={styles.nav_icon}/> <span>Products</span></Link>
+            href="/store/create"
+            ><ShoppingBagIcon className={styles.nav_icon}/> <span>Post product</span></Link>
             <Link
             className={styles.nav_link}
-            href="/"
+            href="/cart"
             ><ShoppingCartIcon className={styles.nav_icon}/> <span>Cart</span></Link>
         </div>
       </header>

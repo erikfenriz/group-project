@@ -6,6 +6,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { FormEvent } from "react";
 import { ClipLoader } from "react-spinners";
+import { useRouter } from "next/router";
 
 interface FormData {
     name: string;
@@ -73,38 +74,48 @@ const CreateForm: React.FC<CreateFormProps> = ({ session }) => {
       const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
         setIsLoading(true);
-    
-        const imageUrls = await uploadImages(formData.images);
-    
-        const dataToSend = {
-          ...formData,
-          price: parseFloat(formData.price), // Convert price to number
-          size: formData.size,
-          images: imageUrls,
-          storeId: parseInt(formData.storeId), // Convert storeId to number
-          storeName: formData.storeName,
-          category: parseInt(formData.category), // Convert category to number
-          email: session.user.email
-        };
-    
+
         try {
-          const response = await fetch("http://localhost:4000/items", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(dataToSend),
-          });
-    
-          if (response.ok) {
-            console.log("Item created successfully");
-          } else {
-            console.error("Error creating item");
-          }
+            const imageUrls = await uploadImages(formData.images);
+
+            const dataToSend = {
+                ...formData,
+                price: parseFloat(formData.price),
+                size: formData.size,
+                images: imageUrls,
+                storeId: parseInt(formData.storeId),
+                storeName: formData.storeName,
+                category: parseInt(formData.category),
+                email: session.user.email,
+            };
+
+            const response = await fetch("http://localhost:4000/items", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(dataToSend),
+            });
+
+            if (response.ok) {
+                console.log("Item created successfully");
+                setFormData({
+                    name: "",
+                    description: "",
+                    price: "",
+                    size: "",
+                    images: [],
+                    storeId: "",
+                    storeName: "",
+                    category: "",
+                });
+            } else {
+                console.error("Error creating item");
+            }
         } catch (error) {
-          console.error("Error:", error);
+            console.error("Error:", error);
         } finally {
-            setIsLoading(false);  // Stop loading
+            setIsLoading(false); 
         }
     };
 
@@ -274,13 +285,14 @@ const CreateForm: React.FC<CreateFormProps> = ({ session }) => {
                     </div>
                     <div className={styles.submit_button}>
                         <div className={styles.submit_div}>
-                            <input
-                                id="submitBtn"
+                            <button
                                 type="submit"
-                                value="Submit"
                                 className={styles.submitBtn}
-                            />
-                            <PaperAirplaneIcon className={styles.submit_icon} />
+                                disabled={isLoading} // Disable button while loading
+                            >
+                                Post
+                                <PaperAirplaneIcon className={styles.submit_icon} />
+                            </button>
                         </div>
                         {isLoading && (
                             <div className={styles.loadingOverlay}>

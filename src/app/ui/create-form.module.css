@@ -44,7 +44,7 @@
     display: flex;
     justify-content: space-evenly;
     height: 40px;
-    width: 12rem;
+    width: 8rem;
     margin: 2rem auto 3rem auto;
     border-radius: 10px;
     background-color: #DBCBD8;
@@ -60,11 +60,20 @@
 .submit_div {
     display: flex;
     width: 8rem;
+    height: 40px;
     justify-content: space-around;
+    align-items: center;
+}
+.submitBtn {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: inherit;
+    height: inherit;
 }
 
 .loadingOverlay {
     position: absolute;
-    margin-left: 17rem;
+    margin-left: 12rem;
     
 }
