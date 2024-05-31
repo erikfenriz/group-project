@@ -5,6 +5,7 @@ import { PaperAirplaneIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import Image from "next/image";
 import { FormEvent } from "react";
+import { ClipLoader } from "react-spinners";
 
 interface FormData {
     name: string;
@@ -32,6 +33,8 @@ const CreateForm: React.FC<CreateFormProps> = ({ session }) => {
         storeName: "",
         category: "",
       });
+
+      const [isLoading, setIsLoading] = useState(false);
     
       const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value, type, files } = e.target as HTMLInputElement;
@@ -69,6 +72,7 @@ const CreateForm: React.FC<CreateFormProps> = ({ session }) => {
     
       const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
+        setIsLoading(true);
     
         const imageUrls = await uploadImages(formData.images);
     
@@ -99,11 +103,13 @@ const CreateForm: React.FC<CreateFormProps> = ({ session }) => {
           }
         } catch (error) {
           console.error("Error:", error);
+        } finally {
+            setIsLoading(false);  // Stop loading
         }
     };
 
     return (
-        <>
+        <>  
             <form className={styles.form}  onSubmit={handleSubmit}>
                 <div className={styles.title_div}>
                     <h1 className={styles.title}>Post an item</h1>
@@ -267,13 +273,20 @@ const CreateForm: React.FC<CreateFormProps> = ({ session }) => {
                         </div>
                     </div>
                     <div className={styles.submit_button}>
-                        <input
-                            id="submitBtn"
-                            type="submit"
-                            value="Submit"
-                            className={styles.submitBtn}
-                        />
-                        <PaperAirplaneIcon className={styles.submit_icon} />
+                        <div className={styles.submit_div}>
+                            <input
+                                id="submitBtn"
+                                type="submit"
+                                value="Submit"
+                                className={styles.submitBtn}
+                            />
+                            <PaperAirplaneIcon className={styles.submit_icon} />
+                        </div>
+                        {isLoading && (
+                            <div className={styles.loadingOverlay}>
+                                <ClipLoader color="#00BFFF" loading={isLoading} size={50} />
+                            </div>
+                        )}
                     </div>
                 </fieldset>
             </form>
