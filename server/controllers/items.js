@@ -51,15 +51,10 @@ const getItemRating = async (req, res) => {
       res.status(400).json({ message: 'You must use a valid item ID' });
     }
 
-    const itemId = req.params.id;
-    const result = await mongodb.getDb().db().collection(collectionNameRating).find({ id: itemId });
-
+    const itemId = new ObjectId(req.params.id);
+    const result = await mongodb.getDb().db().collection(collectionNameRating).find({ itemId: itemId });
     result.toArray().then((ratings) => {
-      if (ratings.length === 0) {
-        res.status(404).json({message: 'The item with that ID does not exist.'});
-        return;
-      }
-      res.status(200).json(ratings[0]);
+      res.status(200).json(ratings);
     });
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -85,7 +80,7 @@ const postItemRating = async (req, res) => {
         res.status(201).json(ratings);
       });
     } else {
-      res.status(500).json({message: 'Some error occurred while creating the article.'})
+      res.status(500).json({message: 'Some error occurred while creating the item.'})
     }
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -120,38 +115,6 @@ const createItem = async (req, res) => {
   }
 };
 
-const updateArticle = async (req, res) => {
-
-
-  const itemBody = {
-      name: req.body.name,
-      description: req.body.description,
-      price: req.body.price,
-      size: req.body.size,
-      images: req.body.images,
-      storeId: req.body.storeId,
-      storeName: req.body.storeName,
-      category: req.body.category
-  };
-
-  try {
-    if (!ObjectId.isValid(req.params.id)) {
-      res.status(400).json({ message: 'You must use a valid item ID to find one.' });
-    }
-
-    const articleId = new ObjectId(req.params.id);
-    const response = await mongodb.getDb().db().collection(collectionName).replaceOne({ _id: articleId }, articleBody);
-
-    if (response.modifiedCount > 0) {
-      res.status(204).json(response);
-    } else {
-      res.status(500).json(response.error || 'Some error occurred while updating the article.');
-    }
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-};
-
 const deleteItem = async (req, res) => {
   try {
     if (!ObjectId.isValid(req.params.id)) {
@@ -177,6 +140,5 @@ module.exports = {
     getItemRating,
     postItemRating,
     createItem,
-    // updateArticle,
     deleteItem
 };

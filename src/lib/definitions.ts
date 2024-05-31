@@ -27,3 +27,5 @@ export interface ItemPageProps {
   item: Item;
   handleDelete: (itemId: number, itemEmail: string) => void;
 }
+
+export type Review = {_id: string, rating: number, itemId: string}
