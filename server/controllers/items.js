@@ -108,7 +108,8 @@ const postItemComment = async (req, res) => {
   try {
     const itemId = new ObjectId(req.params.id);
     const comment = {
-      comment: req.body.comment,
+      author: req.body.author,
+      text: req.body.text,
       itemId: itemId,
     };
 

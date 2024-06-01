@@ -25,11 +25,13 @@
     font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 5px;
+    color: black;
 }
 
 .textarea {
     height: 100px;
     resize: none;
+    color: black;
 }
 
 .submitButton {
@@ -61,6 +63,12 @@
 
 .author {
     font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.commentText {
+    font-weight: 400;
     margin-bottom: 5px;
     color: #333;
 }
