@@ -1,20 +1,11 @@
-
 import Image from "next/image";
 import '@/app/login/login.css';
-import {redirect} from 'next/navigation';
-import { getSession, login, logout} from '@/lib/auth';
 
 export default function LoginForm() {
-
     return (
         <main className="login-page">
             <div className="form-wrapper">
-
-                <form action={async (formData) => {
-                    'use server';
-                    await login(formData);
-                }}
-                      className="login-form">
+                <form className="login-form">
                     <Image
                         src="/logo.png"
                         alt="logo"
@@ -49,21 +40,8 @@ export default function LoginForm() {
                         aria-live="polite"
                         aria-atomic="true"
                     >
-                        {/*{errorMessage && (*/}
-                        {/*    <>*/}
-                        {/*        <p className="text-sm text-red-500">{errorMessage}</p>*/}
-                        {/*    </>*/}
-                        {/*)}*/}
                     </div>
-
-                    {/*
-      <div className="account-action">
-              <p>Don't have an account?</p>
-              <a style={{ color: 'green' }} href="/login">Create One</a>
-      </div> */}
-
                 </form>
-
             </div>
         </main>
     );
