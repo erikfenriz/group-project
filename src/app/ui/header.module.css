@@ -22,14 +22,8 @@
     display: flex;
     padding: 5px 0 0 0;
 }
-.nav_link:hover  {
-    transition: 0.25s ease;
-    box-shadow: 0 6px 18px 0 rgba(#000, 0.1);
-    transform: translateY(-5px);
-}
 .nav_link:active {
-    color: white;
-    transform: scale(0.8);
+    color: gray;
 }
 .nav_icon {
     width: 20px;
