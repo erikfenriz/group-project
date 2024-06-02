@@ -1,13 +1,8 @@
 import Image from "next/image";
-import {options} from "./api/auth/[...nextauth]/options"
-import {getServerSession} from "next-auth/next"
 import Link from "next/link";
 import './index.css'
 
 export default async function Home() {
-    const session = await getServerSession(options)
-    console.log('session', session);
-
     return (
         <main className="landing-page">
             <div className="form-wrapper">
