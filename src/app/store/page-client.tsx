@@ -1,7 +1,6 @@
 'use client';
 
 import React, {useEffect, useState} from 'react';
-// import {items} from '@/lib/placeholder-data';
 import styles from './styles.module.css';
 import ItemCard from "@/app/ui/item/item";
 import { Item } from "@/lib/definitions";
