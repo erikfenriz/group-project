@@ -11,7 +11,7 @@ import {API_BASE_URL} from "@/lib/api";
 const Store: React.FC = ({session}) => {
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [items, setItems] = useState<Item[]>([]);
-    console.log(API_BASE_URL)
+
     useEffect(() => {
         const fetchItems = async () => {
             try {
