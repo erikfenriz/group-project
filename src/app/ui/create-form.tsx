@@ -1,12 +1,12 @@
 "use client";
 
-import styles from "@/app/ui/create-form.module.css";
+import React, { useState } from "react";
 import { PaperAirplaneIcon } from "@heroicons/react/24/outline";
-import { useState } from "react";
 import Image from "next/image";
 import { FormEvent } from "react";
 import { ClipLoader } from "react-spinners";
-import { useRouter } from "next/router";
+import {API_BASE_URL} from "@/lib/api";
+import styles from "@/app/ui/create-form.module.css";
 
 interface FormData {
     name: string;
@@ -36,10 +36,10 @@ const CreateForm: React.FC<CreateFormProps> = ({ session }) => {
       });
 
       const [isLoading, setIsLoading] = useState(false);
-    
+
       const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value, type, files } = e.target as HTMLInputElement;
-    
+
         if (type === "file" && files) {
           setFormData((prevFormData) => ({
             ...prevFormData,
@@ -52,7 +52,7 @@ const CreateForm: React.FC<CreateFormProps> = ({ session }) => {
           }));
         }
       };
-    
+
       const convertImageToBase64 = async (file: File) => {
         const reader = new FileReader();
         return new Promise((resolve, reject) => {
@@ -61,7 +61,7 @@ const CreateForm: React.FC<CreateFormProps> = ({ session }) => {
           reader.readAsDataURL(file);
         });
       };
-    
+
       const uploadImages = async (files: File[]) => {
         const imageUrls = [];
         for (const file of files) {
@@ -70,7 +70,7 @@ const CreateForm: React.FC<CreateFormProps> = ({ session }) => {
         }
         return imageUrls;
       };
-    
+
       const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
         setIsLoading(true);
@@ -89,7 +89,7 @@ const CreateForm: React.FC<CreateFormProps> = ({ session }) => {
                 email: session.user.email,
             };
 
-            const response = await fetch("http://localhost:4000/items", {
+            const response = await fetch(`${API_BASE_URL}/items`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -115,12 +115,12 @@ const CreateForm: React.FC<CreateFormProps> = ({ session }) => {
         } catch (error) {
             console.error("Error:", error);
         } finally {
-            setIsLoading(false); 
+            setIsLoading(false);
         }
     };
 
     return (
-        <>  
+        <>
             <form className={styles.form}  onSubmit={handleSubmit}>
                 <div className={styles.title_div}>
                     <h1 className={styles.title}>Post an item</h1>
@@ -143,10 +143,10 @@ const CreateForm: React.FC<CreateFormProps> = ({ session }) => {
                         </label>
                         <div className={styles.input}>
                             <input
-                                id="name" 
+                                id="name"
                                 name="name"
                                 type="text"
-                                placeholder="Enter the name of the item" 
+                                placeholder="Enter the name of the item"
                                 className={styles.input_box}
                                 value={formData.name}
                                 onChange={handleChange}
@@ -161,11 +161,11 @@ const CreateForm: React.FC<CreateFormProps> = ({ session }) => {
                         </label>
                         <div>
                             <input
-                                id="description" 
+                                id="description"
                                 name="description"
                                 type="text"
                                 placeholder="Enter the description of the item"
-                                className={styles.input_box} 
+                                className={styles.input_box}
                                 value={formData.description}
                                 onChange={handleChange}
                                 required
@@ -179,7 +179,7 @@ const CreateForm: React.FC<CreateFormProps> = ({ session }) => {
                         </label>
                         <div>
                             <input
-                                id="price" 
+                                id="price"
                                 name="price"
                                 type="number"
                                 placeholder="Enter the price of the item"
@@ -198,7 +198,7 @@ const CreateForm: React.FC<CreateFormProps> = ({ session }) => {
                         </label>
                         <div>
                             <input
-                                id="size" 
+                                id="size"
                                 name="size"
                                 type="number"
                                 placeholder="Enter the size of the item"
@@ -217,7 +217,7 @@ const CreateForm: React.FC<CreateFormProps> = ({ session }) => {
                         </label>
                         <div>
                             <input
-                                id="images" 
+                                id="images"
                                 name="images"
                                 type="file"
                                 multiple
@@ -234,7 +234,7 @@ const CreateForm: React.FC<CreateFormProps> = ({ session }) => {
                         </label>
                         <div>
                             <input
-                                id="storeId" 
+                                id="storeId"
                                 name="storeId"
                                 type="number"
                                 placeholder="Enter Store ID"
@@ -253,7 +253,7 @@ const CreateForm: React.FC<CreateFormProps> = ({ session }) => {
                         </label>
                         <div>
                             <input
-                                id="storeName" 
+                                id="storeName"
                                 name="storeName"
                                 type="text"
                                 placeholder="Enter Store Name"
@@ -271,7 +271,7 @@ const CreateForm: React.FC<CreateFormProps> = ({ session }) => {
                         </label>
                         <div>
                             <input
-                                id="category" 
+                                id="category"
                                 name="category"
                                 type="number"
                                 placeholder="Enter category number"
@@ -303,7 +303,7 @@ const CreateForm: React.FC<CreateFormProps> = ({ session }) => {
                 </fieldset>
             </form>
         </>
-        
+
     )
 }
 
