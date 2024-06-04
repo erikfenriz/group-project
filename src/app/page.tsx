@@ -1,8 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import './index.css'
+import {API_BASE_URL} from "@/lib/api";
 
 export default async function Home() {
+    console.log(API_BASE_URL)
     return (
         <main className="landing-page">
             <div className="form-wrapper">

@@ -41,7 +41,7 @@ const Store: React.FC = ({session}) => {
     const handleDelete = async (itemId: number, itemEmail: string) => {
         try {
             if (session.user && session.user.email === itemEmail) {
-                const response = await fetch(`http://localhost:4000/items/${itemId}`, {
+                const response = await fetch(`${API_BASE_URL}/items/${itemId}`, {
                     method: 'DELETE',
                 });
 
